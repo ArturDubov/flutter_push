@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 36,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
                 ),
@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 switch (gameState) {
                   case GameState.readyToStart:
                     gameState = GameState.waiting;
-                    millisecondtext = "149";
+                    millisecondtext = "";
                     cvet = 0xFF40CA88;
                     _startWaitingTimer();
                     break;
@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
               }),
               child: ColoredBox(
-                color: Color(cvet),
+                color: _getButtonColor(),
                 child: SizedBox(
                   height: 200,
                   width: 200,
@@ -105,6 +105,17 @@ class _MyHomePageState extends State<MyHomePage> {
             )),
       ]),
     );
+  }
+
+  Color _getButtonColor() {
+    switch (gameState) {
+      case GameState.readyToStart:
+        return const Color(0xFF40CA88);
+      case GameState.waiting:
+        return const Color(0xFFE0982D);
+      case GameState.canBeStopped:
+        return const Color(0xFFE02D47);
+    }
   }
 
   String _getButtonText() {
